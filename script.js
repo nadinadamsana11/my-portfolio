@@ -387,9 +387,36 @@ const Blog = ({ darkMode }) => {
 
 // 5. Contact Section
 const Contact = ({ darkMode }) => {
-    // Formspree මගින් form submission එක හසුරුවන බැවින්,
-    // React state (submitted, isLoading) සහ handleSubmit ශ්‍රිතය
-    // තවදුරටත් අවශ්‍ය නොවේ.
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // 1. reCAPTCHA Validation (Client-side)
+        // reCAPTCHA එක click කර නැත්නම් මෙතැනින් නවතී
+        if (window.grecaptcha && window.grecaptcha.getResponse().length === 0) {
+            alert("Please verify that you are not a robot.");
+            return;
+        }
+
+        // 2. AJAX Submission (Redirect issue විසඳීමට)
+        const form = e.target;
+        const data = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                window.location.href = "thankyou.html"; // සාර්ථක වූ පසු Redirect කිරීම
+            } else {
+                alert("Oops! There was a problem submitting your form.");
+            }
+        } catch (error) {
+            alert("Oops! There was a problem submitting your form.");
+        }
+    };
 
     return (
         <section id="contact" className={`section-fullscreen ${darkMode ? 'bg-black text-white' : 'bg-light'}`}>
@@ -441,7 +468,7 @@ const Contact = ({ darkMode }) => {
                     {/* Contact Form */}
                     <div className="col-lg-7" data-aos="fade-left">
                         <div className={`p-5 rounded-4 h-100 ${darkMode ? 'bg-dark' : 'bg-white shadow-sm'}`}>
-                            <form action="https://formspree.io/f/xaqyawyj" method="POST">
+                            <form action="https://formspree.io/f/xaqyawyj" method="POST" onSubmit={handleSubmit}>
                                 {/* 1. Submission එකෙන් පසු Redirect කිරීම සඳහා */}
                                 <input type="hidden" name="_next" value="thankyou.html" />
                                 
