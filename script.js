@@ -387,6 +387,8 @@ const Blog = ({ darkMode }) => {
 
 // 5. Contact Section
 const Contact = ({ darkMode }) => {
+    const [showPopup, setShowPopup] = React.useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -409,7 +411,12 @@ const Contact = ({ darkMode }) => {
             });
 
             if (response.ok) {
-                window.location.href = "thankyou.html"; // සාර්ථක වූ පසු Redirect කිරීම
+                setShowPopup(true); // Popup එක පෙන්වීම
+                form.reset(); // Form එක හිස් කිරීම
+                if (window.grecaptcha) window.grecaptcha.reset(); // reCAPTCHA reset කිරීම
+                
+                // තත්පර 3කින් Popup එක ඉවත් කිරීම
+                setTimeout(() => setShowPopup(false), 3000);
             } else {
                 alert("Oops! There was a problem submitting your form.");
             }
@@ -467,7 +474,17 @@ const Contact = ({ darkMode }) => {
 
                     {/* Contact Form */}
                     <div className="col-lg-7" data-aos="fade-left">
-                        <div className={`p-5 rounded-4 h-100 ${darkMode ? 'bg-dark' : 'bg-white shadow-sm'}`}>
+                        <div className={`p-5 rounded-4 h-100 position-relative ${darkMode ? 'bg-dark' : 'bg-white shadow-sm'}`}>
+                            
+                            {/* Success Popup Message */}
+                            {showPopup && (
+                                <div className="success-popup">
+                                    <div className="text-success mb-3"><i className="bi bi-check-circle-fill display-1"></i></div>
+                                    <h3 className="fw-bold">Message Sent!</h3>
+                                    <p className="text-muted">Thank you for contacting me.</p>
+                                </div>
+                            )}
+
                             <form action="https://formspree.io/f/xaqyawyj" method="POST" onSubmit={handleSubmit}>
                                 {/* 1. Submission එකෙන් පසු Redirect කිරීම සඳහා */}
                                 <input type="hidden" name="_next" value="thankyou.html" />
