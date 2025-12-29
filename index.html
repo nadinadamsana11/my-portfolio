@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadina Damsana - Portfolio</title>
+
+    <!-- 1. React and ReactDOM CDN Links -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- 2. Babel CDN (Required to convert JSX to JavaScript in the browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 3. Framework CDNs (Tailwind, Bootstrap CSS, Bootstrap Icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- style.css යනු ඔබේ CSS ගොනුවේ නමයි -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+
+    <div id="root"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- 4. React Code (type="text/babel" is important) -->
+    <script type="text/babel" src="script.js"></script>
+
+    <!-- Terminal Window -->
+    <div id="terminal-icon">
+        <i class="bi bi-terminal"></i>
+    </div>
+
+    <div id="terminal-window">
+        <div id="terminal-resizer"></div>
+        <div id="terminal-header">
+            <span class="terminal-title">Terminal</span>
+            <span id="close-terminal">×</span>
+        </div>
+        <div id="terminal-body">
+            <div id="terminal-output"></div>
+            <input type="text" id="terminal-input" placeholder="Enter command" />
+        </div>
+    </div>
+
+<!-- Custom Terminal Element -->
+<div class="cursor-dot"></div>
+
+</body>
+</html>
