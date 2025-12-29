@@ -1,35 +1,36 @@
 # 🚀 Freelance Web Developer Portfolio
 
-මගේ වෘත්තීයමය Portfolio වෙබ් අඩවියට සාදරයෙන් පිළිගනිමි! මෙය මගේ දක්ෂතා, ව්‍යාපෘති සහ අත්දැකීම් ප්‍රදර්ශනය කිරීම සඳහා නිර්මාණය කරන ලද වෙබ් අඩවියකි.
+Welcome to my professional portfolio repository! This project showcases my skills, featured works, and my journey as a web developer.
 
-### 🌐 සජීවීව නරඹන්න (Live Preview)
-ඔබට මගේ වෙබ් අඩවිය මෙතැනින් නැරඹිය හැකිය: 
+### 🌐 Live Preview
+You can view the live website here: 
 👉 **[https://nadinadamsana11.github.io/my-portfolio/](https://nadinadamsana11.github.io/my-portfolio/)**
 
 ---
 
-### 🛠️ තාක්ෂණික මෙවලම් (Tech Stack)
-මෙම වෙබ් අඩවිය නිර්මාණය කිරීම සඳහා මම පහත තාක්ෂණයන් භාවිතා කළෙමි:
-* **HTML5** - ව්‍යුහය සඳහා
-* **CSS3** - හැඩගැන්වීම් සහ Animations සඳහා
-* **JavaScript** - ක්‍රියාකාරීත්වය (Interactivity) සඳහා
-* **FontAwesome** - අයිකන සඳහා
+### 🛠️ Tech Stack
+This portfolio was built using modern web technologies:
+* **HTML5** - For semantic structural markup.
+* **CSS3** - For custom styling, layout (Flexbox/Grid), and animations.
+* **JavaScript** - For interactive elements and dynamic functionality.
+* **FontAwesome** - For professional scalable vector icons.
 
-### ✨ විශේෂාංග (Key Features)
-* **Responsive Design:** ඕනෑම දුරකථනයක හෝ පරිගණකයක ලස්සනට පෙනෙන අයුරින් සකසා ඇත.
-* **Smooth Animations:** පරිශීලකයාට ආකර්ෂණීය අත්දැකීමක් ලබා දෙයි.
-* **Project Showcase:** මා විසින් කරන ලද ව්‍යාපෘති නැරඹීමේ හැකියාව.
-* **Contact Form:** පණිවිඩයක් එවීමට ඇති පහසුකම.
-
----
-
-### 👨‍💻 මා ගැන (About Me)
-මම නදීන් දම්සන, වෙබ් අඩවි නිර්මාණය පිළිබඳ දැඩි උනන්දුවක් දක්වන Freelance Web Developer කෙනෙක්මි. උසස් තත්ත්වයේ සහ නවීන පෙනුමක් ඇති වෙබ් අඩවි නිර්මාණය කිරීම මගේ අරමුණයි.
-
-### 📫 මා සම්බන්ධ කර ගැනීමට
-ඔබට කිසියම් ව්‍යාපෘතියක් සඳහා මගේ සහාය අවශ්‍ය නම් හෝ මා සමඟ සම්බන්ධ වීමට අවශ්‍ය නම්:
-* **Email:** [ඔබේ Email එක මෙතැනට දාන්න]
-* **LinkedIn:** [ඔබේ LinkedIn Link එක මෙතැනට දාන්න]
+### ✨ Key Features
+* **Fully Responsive:** Optimized for all screen sizes from mobile devices to large desktops.
+* **Interactive UI:** Includes smooth scrolling, hover effects, and a dynamic skill orbit.
+* **Project Showcase:** A dedicated section displaying my latest web development work.
+* **Modern Design:** Clean, minimal, and professional aesthetic focusing on user experience.
 
 ---
-⭐️ ඔබ මගේ මෙම ව්‍යාපෘතියට කැමති නම් "Star" එකක් ලබා දී සහයෝගය දක්වන්න!
+
+### 👨‍💻 About Me
+I'm **Nadina Damsana**, a passionate Freelance Web Developer. I specialize in building high-quality, user-friendly websites and applications. I am constantly learning new technologies to deliver the best digital solutions for my clients.
+
+### 📫 Let's Connect
+I am open to collaborations and freelance opportunities. Feel free to reach out!
+* **LinkedIn:** [Your LinkedIn Profile Link]
+* **Email:** [Your Email Address]
+* **GitHub:** [@nadinadamsana11](https://github.com/nadinadamsana11)
+
+---
+⭐️ If you like this project, please feel free to give it a star!
