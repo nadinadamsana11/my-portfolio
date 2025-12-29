@@ -387,17 +387,9 @@ const Blog = ({ darkMode }) => {
 
 // 5. Contact Section
 const Contact = ({ darkMode }) => {
-    const [submitted, setSubmitted] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(false);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-            setSubmitted(true);
-        }, 2000);
-    };
+    // Formspree මගින් form submission එක හසුරුවන බැවින්,
+    // React state (submitted, isLoading) සහ handleSubmit ශ්‍රිතය
+    // තවදුරටත් අවශ්‍ය නොවේ.
 
     return (
         <section id="contact" className={`section-fullscreen ${darkMode ? 'bg-black text-white' : 'bg-light'}`}>
@@ -449,49 +441,40 @@ const Contact = ({ darkMode }) => {
                     {/* Contact Form */}
                     <div className="col-lg-7" data-aos="fade-left">
                         <div className={`p-5 rounded-4 h-100 ${darkMode ? 'bg-dark' : 'bg-white shadow-sm'}`}>
-                            {submitted ? (
-                                <div className="text-center h-100 d-flex flex-column justify-content-center align-items-center">
-                                    <div className="mb-4 text-success">
-                                        <i className="bi bi-check-circle-fill display-1"></i>
+                            <form action="https://formspree.io/f/xaqyawyj" method="POST">
+                                {/* 1. Submission එකෙන් පසු Redirect කිරීම සඳහා */}
+                                <input type="hidden" name="_next" value="thankyou.html" />
+                                
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label fw-bold small text-muted">YOUR NAME</label>
+                                        <input type="text" name="name" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="John Doe" required />
                                     </div>
-                                    <h3 className="fw-bold">Message Sent!</h3>
-                                    <p className="text-muted mb-4">Thank you for contacting me. I will reply shortly.</p>
-                                    <button className="btn btn-primary px-4 rounded-pill" onClick={() => setSubmitted(false)}>Send Another</button>
+                                    <div className="col-md-6">
+                                        <label className="form-label fw-bold small text-muted">YOUR EMAIL</label>
+                                        <input type="email" name="email" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="john@example.com" required />
+                                    </div>
+                                    <div className="col-12">
+                                        <label className="form-label fw-bold small text-muted">SUBJECT</label>
+                                        <input type="text" name="subject" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="Project Discussion" required />
+                                    </div>
+                                    <div className="col-12">
+                                        <label className="form-label fw-bold small text-muted">MESSAGE</label>
+                                        <textarea name="message" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} rows="5" placeholder="Tell me about your project..." required></textarea>
+                                    </div>
+                                    
+                                    {/* 2. Google reCAPTCHA එකතු කිරීම (Spam වැළැක්වීමට) */}
+                                    <div className="col-12">
+                                        <div className="g-recaptcha" data-sitekey="6Ld4PzosAAAAAH3AhnujLnaYgvrOwk_L0WsW4Lwo"></div>
+                                    </div>
+
+                                    <div className="col-12 mt-4">
+                                        <button type="submit" className="btn btn-primary w-100 py-3 fw-bold rounded-3">
+                                            <span>Send Message <i className="bi bi-send-fill ms-2"></i></span>
+                                        </button>
+                                    </div>
                                 </div>
-                            ) : (
-                                <form onSubmit={handleSubmit}>
-                                    <div className="row g-3">
-                                        <div className="col-md-6">
-                                            <label className="form-label fw-bold small text-muted">YOUR NAME</label>
-                                            <input type="text" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="John Doe" required />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label className="form-label fw-bold small text-muted">YOUR EMAIL</label>
-                                            <input type="email" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="john@example.com" required />
-                                        </div>
-                                        <div className="col-12">
-                                            <label className="form-label fw-bold small text-muted">SUBJECT</label>
-                                            <input type="text" className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} placeholder="Project Discussion" required />
-                                        </div>
-                                        <div className="col-12">
-                                            <label className="form-label fw-bold small text-muted">MESSAGE</label>
-                                            <textarea className={`form-control p-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light border-0'}`} rows="5" placeholder="Tell me about your project..." required></textarea>
-                                        </div>
-                                        <div className="col-12 mt-4">
-                                            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold rounded-3" disabled={isLoading}>
-                                                {isLoading ? (
-                                                    <span>
-                                                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                                        Sending...
-                                                    </span>
-                                                ) : (
-                                                    <span>Send Message <i className="bi bi-send-fill ms-2"></i></span>
-                                                )}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            )}
+                            </form>
                         </div>
                     </div>
                 </div>
