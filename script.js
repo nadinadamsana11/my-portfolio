@@ -349,11 +349,63 @@ const Testimonials = ({ darkMode }) => {
 
 // 6. Blog Section (New)
 const Blog = ({ darkMode }) => {
-    const posts = [
-        { title: "The Future of Web Development", date: "Oct 24, 2023", excerpt: "Exploring the latest trends in AI and web technologies.", img: "https://placehold.co/600x400/png?text=Blog+1" },
-        { title: "Mastering React Hooks", date: "Nov 15, 2023", excerpt: "A deep dive into useEffect, useState, and custom hooks.", img: "https://placehold.co/600x400/png?text=Blog+2" },
-        { title: "CSS Grid vs Flexbox", date: "Dec 05, 2023", excerpt: "When to use which layout model for modern web design.", img: "https://placehold.co/600x400/png?text=Blog+3" }
-    ];
+    const [allPosts, setAllPosts] = React.useState([]); // සියලුම Posts ගබඩා කිරීමට
+    const [visibleCount, setVisibleCount] = React.useState(3); // දැනට පෙන්වන ප්‍රමාණය
+    const [loading, setLoading] = React.useState(true); // Loading State එක
+
+    React.useEffect(() => {
+        // Blogger JSON Feed එකෙන් දත්ත ලබා ගැනීම
+        fetch('https://blackwebproject.blogspot.com/feeds/posts/default?alt=json')
+            .then(res => res.json())
+            .then(data => {
+                const entries = data.feed.entry || []; // Entry නොමැති නම් හිස් Array එකක්
+                const fetchedPosts = entries.map(entry => {
+                    // 1. Link එක ලබා ගැනීම
+                    const link = entry.link.find(l => l.rel === 'alternate').href;
+                    
+                    // 2. Image එක ලබා ගැනීම (Thumbnail එක ලොකු කර ගැනීම)
+                    let img = "https://placehold.co/600x400/png?text=No+Image";
+                    if (entry.media$thumbnail) {
+                        // s72-c (කුඩා) වෙනුවට w600-h400-c (ලොකු) ලෙස වෙනස් කිරීම
+                        img = entry.media$thumbnail.url.replace(/\/s[0-9]+(-c)?\//, "/w600-h400-c/"); 
+                    } else if (entry.content && entry.content.$t) {
+                        // Content එකේ img tag එකක් තිබේදැයි බැලීම
+                        const doc = new DOMParser().parseFromString(entry.content.$t, 'text/html');
+                        const imgTag = doc.querySelector('img');
+                        if (imgTag) img = imgTag.src;
+                    }
+
+                    // 3. කෙටි විස්තරය (Excerpt) සකසා ගැනීම
+                    let excerpt = "";
+                    if (entry.summary) {
+                        excerpt = entry.summary.$t;
+                    } else if (entry.content) {
+                        const doc = new DOMParser().parseFromString(entry.content.$t, 'text/html');
+                        excerpt = doc.body.textContent || "";
+                    }
+                    excerpt = excerpt.substring(0, 100) + "...";
+
+                    // 4. දිනය ආකෘතිකරණය
+                    const date = new Date(entry.published.$t).toLocaleDateString('en-US', { 
+                        year: 'numeric', month: 'short', day: 'numeric' 
+                    });
+
+                    return { title: entry.title.$t, date, excerpt, img, link };
+                });
+                setAllPosts(fetchedPosts);
+                setLoading(false); // දත්ත ලැබුණු පසු Loading නවැත්වීම
+            })
+            .catch(err => {
+                console.error("Failed to fetch blog posts", err);
+                setLoading(false);
+            });
+    }, []);
+
+    // Load More Button Click Event
+    const handleLoadMore = (e) => {
+        e.preventDefault();
+        setVisibleCount(prev => prev + 3); // තවත් 3ක් පෙන්වන්න
+    };
 
     return (
         <section id="blog" className={`section-fullscreen ${darkMode ? 'bg-dark text-white' : 'bg-white'}`}>
@@ -363,22 +415,45 @@ const Blog = ({ darkMode }) => {
                     <p className="text-muted">Thoughts and insights on technology</p>
                 </div>
                 <div className="row g-4">
-                    {posts.map((post, index) => (
-                        <div key={index} className="col-md-4" data-aos="fade-up" data-aos-delay={index * 100}>
-                            <div className={`card h-100 border-0 shadow-sm overflow-hidden blog-card ${darkMode ? 'bg-secondary bg-opacity-10 text-white' : ''}`}>
-                                <img src={post.img} className="card-img-top" alt={post.title} />
-                                <div className="card-body p-4">
-                                    <small className="text-primary fw-bold">{post.date}</small>
-                                    <h5 className="card-title fw-bold mt-2">{post.title}</h5>
-                                    <p className="card-text small opacity-75">{post.excerpt}</p>
-                                    <a href="#" className="text-primary text-decoration-none fw-bold">Read More <i className="bi bi-arrow-right"></i></a>
+                    {loading ? (
+                        // Loading Animation (Skeleton Loader) - පෙන්වීමට කාඩ්පත් 3ක්
+                        [1, 2, 3].map((n) => (
+                            <div key={n} className="col-md-4">
+                                <div className={`card h-100 border-0 shadow-sm overflow-hidden ${darkMode ? 'bg-secondary bg-opacity-10' : ''}`}>
+                                    <div className="skeleton skeleton-img"></div>
+                                    <div className="card-body p-4">
+                                        <div className="skeleton skeleton-text w-25"></div>
+                                        <div className="skeleton skeleton-title"></div>
+                                        <div className="skeleton skeleton-text"></div>
+                                        <div className="skeleton skeleton-text"></div>
+                                        <div className="skeleton skeleton-text w-50"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        // දත්ත ලැබුණු පසු Posts පෙන්වීම
+                        allPosts.slice(0, visibleCount).map((post, index) => (
+                            <div key={index} className="col-md-4" data-aos="fade-up">
+                                <div className={`card h-100 border-0 shadow-sm overflow-hidden blog-card ${darkMode ? 'bg-secondary bg-opacity-10 text-white' : ''}`}>
+                                    <img src={post.img} className="card-img-top" alt={post.title} />
+                                    <div className="card-body p-4">
+                                        <small className="text-primary fw-bold">{post.date}</small>
+                                        <h5 className="card-title fw-bold mt-2">{post.title}</h5>
+                                        <p className="card-text small opacity-75">{post.excerpt}</p>
+                                        <a href={post.link} target="_blank" rel="noopener noreferrer" className="text-primary text-decoration-none fw-bold">Read More <i className="bi bi-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
                 <div className="text-center mt-5">
-                    <a href="#" className="btn btn-outline-primary rounded-pill px-4">View All Posts</a>
+                    {/* තවත් Posts තිබේ නම් පමණක් Load More බොත්තම පෙන්වීම */}
+                    {!loading && visibleCount < allPosts.length && (
+                        <button onClick={handleLoadMore} className="btn btn-primary rounded-pill px-4 me-2">Load More</button>
+                    )}
+                    <a href="https://blackwebproject.blogspot.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary rounded-pill px-4">Visit Blog</a>
                 </div>
             </div>
         </section>
