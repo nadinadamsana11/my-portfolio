@@ -389,6 +389,17 @@ const Blog = ({ darkMode }) => {
 const Contact = ({ darkMode }) => {
     const [showPopup, setShowPopup] = React.useState(false);
 
+    // reCAPTCHA Script එක load කිරීම (Component එක mount වූ පසු)
+    React.useEffect(() => {
+        const script = document.createElement('script');
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+        
+        return () => document.body.removeChild(script);
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
