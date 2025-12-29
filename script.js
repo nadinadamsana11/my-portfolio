@@ -200,68 +200,137 @@ const About = ({ darkMode }) => {
 
 // 3. Skills Section
 const Skills = ({ darkMode }) => {
-    // තරු නිර්මාණය කිරීම (Stars Generation)
-    const stars = React.useMemo(() => [...Array(50)].map((_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        size: Math.random() * 2 + 1,
-        duration: Math.random() * 3 + 2
-    })), []);
+    const sphereRef = React.useRef(null);
+    const [selectedSkill, setSelectedSkill] = React.useState(null); // Popup සඳහා State එක
+    const [rotation, setRotation] = React.useState({ x: 0, y: 0 });
 
+    // Skills Data with Details
     const skills = [
-        { name: "React JS", icon: "bi-filetype-jsx", color: "text-info" },
-        { name: "JavaScript", icon: "bi-filetype-js", color: "text-warning" },
-        { name: "Bootstrap", icon: "bi-bootstrap", color: "text-primary" },
-        { name: "Tailwind", icon: "bi-wind", color: "text-success" },
-        { name: "Node JS", icon: "bi-hexagon", color: "text-success" },
-        { name: "Database", icon: "bi-database", color: "text-secondary" },
+        { name: "React JS", icon: "bi-filetype-jsx", level: "Advanced", exp: "4 Years" },
+        { name: "JavaScript", icon: "bi-filetype-js", level: "Expert", exp: "5 Years" },
+        { name: "Bootstrap", icon: "bi-bootstrap", level: "Advanced", exp: "4 Years" },
+        { name: "Tailwind", icon: "bi-wind", level: "Intermediate", exp: "2 Years" },
+        { name: "Node JS", icon: "bi-hexagon", level: "Intermediate", exp: "3 Years" },
+        { name: "MongoDB", icon: "bi-database", level: "Intermediate", exp: "3 Years" },
+        { name: "HTML5", icon: "bi-filetype-html", level: "Expert", exp: "6 Years" },
+        { name: "CSS3", icon: "bi-filetype-css", level: "Expert", exp: "6 Years" },
+        { name: "Git", icon: "bi-git", level: "Advanced", exp: "4 Years" },
+        { name: "Figma", icon: "bi-palette", level: "Intermediate", exp: "2 Years" },
+        { name: "Python", icon: "bi-filetype-py", level: "Basic", exp: "1 Year" },
+        { name: "REST API", icon: "bi-cloud-arrow-down", level: "Advanced", exp: "3 Years" },
+        { name: "Next.js", icon: "bi-filetype-tsx", level: "Intermediate", exp: "2 Years" },
+        { name: "Three.js", icon: "bi-box", level: "Basic", exp: "1 Year" }
     ];
+
+    // Ring Layout Algorithm (රවුමට පෙළගැස්වීම)
+    const skillElements = React.useMemo(() => {
+        const n = skills.length;
+        const radius = window.innerWidth < 768 ? 200 : 350; // රවුමේ විශාලත්වය
+        const angleStep = (2 * Math.PI) / n;
+
+        return skills.map((skill, i) => {
+            const theta = angleStep * i;
+            const x = radius * Math.sin(theta);
+            const z = radius * Math.cos(theta);
+            
+            // rotY මගින් කාඩ්පත් පිටතට මුහුණ ලා සිටින ලෙස සකසයි
+            return { ...skill, x, z, rotY: theta };
+        });
+    }, [skills.length]);
+
+    // Animation Loop for Rotation
+    React.useEffect(() => {
+        let animationFrame;
+        const animate = () => {
+            if (sphereRef.current) {
+                // Popup එක open නැතිනම් පමණක් කරකවන්න (Pause when popup is open)
+                if (!selectedSkill) {
+                    // වේගය 0.2 සිට 0.05 දක්වා අඩු කරන ලදී (Very Slow Speed)
+                    setRotation(prev => ({ x: prev.x, y: prev.y + 0.05 }));
+                }
+                sphereRef.current.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+            }
+            animationFrame = requestAnimationFrame(animate);
+        };
+        animate();
+        return () => cancelAnimationFrame(animationFrame);
+    }, [rotation, selectedSkill]);
+
     return (
-        <section id="skills" className={`section-fullscreen position-relative ${darkMode ? 'bg-black' : 'bg-light'}`}>
-            {/* Starry Background (Visible in Dark Mode) */}
-            {darkMode && (
-                <div className="stars-container">
-                    {stars.map((s, i) => (
-                        <div key={i} className="star" style={{
-                            left: `${s.left}%`,
-                            top: `${s.top}%`,
-                            width: `${s.size}px`,
-                            height: `${s.size}px`,
-                            animationDuration: `${s.duration}s`
-                        }}></div>
-                    ))}
-                </div>
-            )}
-            <div className="container py-5 position-relative" style={{ zIndex: 1 }}>
-                <div className="text-center mb-5" data-aos="fade-up">
-                    <h2 className={`fw-bold display-6 ${darkMode ? 'text-white' : ''}`}>My Skills</h2>
-                    <p className={`lead ${darkMode ? 'text-light opacity-75' : 'text-secondary fw-bold'}`}>Technologies I work with</p>
+        <section id="skills" className={`section-fullscreen ${darkMode ? 'bg-black' : 'bg-dark'} text-white overflow-hidden skills-bg-animated no-select`}>
+            <div className="container position-relative z-1">
+                <div className="text-center mb-5" data-aos="fade-down">
+                    <h2 className="fw-bold display-5 gradient-text">Technical Proficiency</h2>
+                    <p className="lead opacity-75">Interactive 3D Skill Universe</p>
                 </div>
                 
-                <div className="orbit-container">
-                    <div className="orbit-center">
-                        <img 
-                            src="https://placehold.co/150x150/png?text=Me" 
-                            alt="Profile" 
-                            className="rounded-circle shadow-lg" 
-                            style={{ width: '100px', height: '100px', objectFit: 'cover', zIndex: 20 }} 
-                        />
-                    </div>
-                    <div className="orbit-system">
-                        {skills.map((s, i) => (
-                            <div key={i} className="skill-item" style={{ '--i': i, '--total': skills.length }}>
-                                <div className="skill-rotator">
-                                    <div className={`skill-card ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-white'}`}>
-                                        <i className={`bi ${s.icon} fs-2 ${s.color}`}></i>
-                                        <span className="small fw-bold mt-1">{s.name}</span>
-                                    </div>
+                {/* Skill Detail Popup */}
+                {selectedSkill && (
+                    <div className="skill-detail-popup" data-aos="fade-left">
+                        <button className="btn-close-popup" onClick={() => setSelectedSkill(null)}>
+                            <i className="bi bi-x-lg"></i>
+                        </button>
+                        <div className="popup-content text-start">
+                            <div className="d-flex align-items-center mb-3">
+                                <i className={`bi ${selectedSkill.icon} fs-1 me-3 text-info`}></i>
+                                <div>
+                                    <h3 className="h4 fw-bold mb-0">{selectedSkill.name}</h3>
+                                    <span className="badge bg-primary">{selectedSkill.level}</span>
                                 </div>
                             </div>
+                            <p className="mb-2"><strong>Experience:</strong> {selectedSkill.exp}</p>
+                            <p className="small opacity-75">Proficient in building scalable applications using {selectedSkill.name}.</p>
+                        </div>
+                    </div>
+                )}
+
+                <div 
+                    className="skills-scene"
+                >
+                    <div className="skills-sphere" ref={sphereRef}>
+                        {skillElements.map((skill, index) => (
+                            <SkillHex 
+                                key={index} 
+                                skill={skill} 
+                                onSelect={() => setSelectedSkill(skill)} 
+                                onLeave={() => setSelectedSkill(null)} 
+                            />
                         ))}
                     </div>
                 </div>
+                
+                <div className="text-center mt-4 opacity-50 small">
+                    <i className="bi bi-mouse"></i> Click for details
+                </div>
             </div>
         </section>
+    );
+};
+
+// Helper Component for Individual Hexagon
+const SkillHex = ({ skill, onSelect, onLeave }) => {
+    const delay = React.useMemo(() => Math.random() * 2, []); // Random float delay
+
+    return (
+        <div 
+            className="skill-hex-wrapper"
+            style={{
+                transform: `translate3d(${skill.x}px, 0, ${skill.z}px) rotateY(${skill.rotY}rad)`
+            }}
+        >
+            <div 
+                className="skill-hex"
+                onClick={(e) => { e.stopPropagation(); onSelect(); }}
+                onMouseEnter={() => onSelect()} 
+                onMouseLeave={() => onLeave()}
+                style={{ animationDelay: `-${delay}s` }}
+            >
+                <div className="skill-face front">
+                    <i className={`bi ${skill.icon} fs-2 mb-1 text-info`}></i>
+                    <div className="small fw-bold">{skill.name}</div>
+                </div>
+            </div>
+        </div>
     );
 };
 
@@ -350,14 +419,54 @@ const Testimonials = ({ darkMode }) => {
 // 6. Blog Section (New)
 const Blog = ({ darkMode }) => {
     const [allPosts, setAllPosts] = React.useState([]); // සියලුම Posts ගබඩා කිරීමට
-    const [visibleCount, setVisibleCount] = React.useState(3); // දැනට පෙන්වන ප්‍රමාණය
     const [loading, setLoading] = React.useState(true); // Loading State එක
+    
+    // Carousel States
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [itemsPerPage, setItemsPerPage] = React.useState(window.innerWidth < 992 ? 1 : 3);
+    const [isFading, setIsFading] = React.useState(false);
+
+    // Resize Listener (තිරයේ ප්‍රමාණය අනුව පෙන්වන ගණන වෙනස් කිරීමට)
+    React.useEffect(() => {
+        const handleResize = () => setItemsPerPage(window.innerWidth < 992 ? 1 : 3);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Auto-play Functionality (තත්පර 5කට වරක්)
+    React.useEffect(() => {
+        if (loading || allPosts.length <= itemsPerPage) return;
+        const interval = setInterval(() => {
+            const maxIndex = allPosts.length - itemsPerPage;
+            if (currentIndex >= maxIndex) {
+                setIsFading(true);
+                setTimeout(() => {
+                    setCurrentIndex(0);
+                    setTimeout(() => setIsFading(false), 50);
+                }, 500);
+            } else {
+                setCurrentIndex(prev => prev + 1);
+            }
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [currentIndex, loading, allPosts.length, itemsPerPage]);
+
+    // Navigation Handlers
+    const nextSlide = () => {
+        if (currentIndex < allPosts.length - itemsPerPage) setCurrentIndex(prev => prev + 1);
+    };
+
+    const prevSlide = () => {
+        if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
+    };
 
     React.useEffect(() => {
-        // Blogger JSON Feed එකෙන් දත්ත ලබා ගැනීම
-        fetch('https://blackwebproject.blogspot.com/feeds/posts/default?alt=json')
-            .then(res => res.json())
-            .then(data => {
+        // JSONP Callback Function Name (Unique ID එකක් සමඟ)
+        const callbackName = 'bloggerCallback_' + Date.now();
+
+        // Global Callback Function එක නිර්මාණය කිරීම
+        window[callbackName] = (data) => {
+            try {
                 const entries = data.feed.entry || []; // Entry නොමැති නම් හිස් Array එකක්
                 const fetchedPosts = entries.map(entry => {
                     // 1. Link එක ලබා ගැනීම
@@ -366,8 +475,8 @@ const Blog = ({ darkMode }) => {
                     // 2. Image එක ලබා ගැනීම (Thumbnail එක ලොකු කර ගැනීම)
                     let img = "https://placehold.co/600x400/png?text=No+Image";
                     if (entry.media$thumbnail) {
-                        // s72-c (කුඩා) වෙනුවට w600-h400-c (ලොකු) ලෙස වෙනස් කිරීම
-                        img = entry.media$thumbnail.url.replace(/\/s[0-9]+(-c)?\//, "/w600-h400-c/"); 
+                        // s72-c (කුඩා) වෙනුවට s1600 (Original Size) ලෙස වෙනස් කිරීම - High Quality
+                        img = entry.media$thumbnail.url.replace(/\/s[0-9]+(-c)?\//, "/s1600/"); 
                     } else if (entry.content && entry.content.$t) {
                         // Content එකේ img tag එකක් තිබේදැයි බැලීම
                         const doc = new DOMParser().parseFromString(entry.content.$t, 'text/html');
@@ -393,19 +502,34 @@ const Blog = ({ darkMode }) => {
                     return { title: entry.title.$t, date, excerpt, img, link };
                 });
                 setAllPosts(fetchedPosts);
-                setLoading(false); // දත්ත ලැබුණු පසු Loading නවැත්වීම
-            })
-            .catch(err => {
-                console.error("Failed to fetch blog posts", err);
+            } catch (err) {
+                console.error("Error processing blog data", err);
+            } finally {
                 setLoading(false);
-            });
-    }, []);
+                // Cleanup (භාවිතයෙන් පසු ඉවත් කිරීම)
+                delete window[callbackName];
+                const scriptTag = document.getElementById(callbackName);
+                if (scriptTag) scriptTag.remove();
+            }
+        };
 
-    // Load More Button Click Event
-    const handleLoadMore = (e) => {
-        e.preventDefault();
-        setVisibleCount(prev => prev + 3); // තවත් 3ක් පෙන්වන්න
-    };
+        // Script Tag එක සාදා Blogger API වෙත යැවීම (JSONP)
+        const script = document.createElement('script');
+        script.src = `https://blackwebproject.blogspot.com/feeds/posts/default?alt=json-in-script&callback=${callbackName}`;
+        script.id = callbackName;
+        script.onerror = () => {
+            console.error("Failed to load blog posts via JSONP");
+            setLoading(false);
+        };
+        document.body.appendChild(script);
+
+        // Component Unmount වන විට Cleanup කිරීම
+        return () => {
+            if (window[callbackName]) delete window[callbackName];
+            const scriptTag = document.getElementById(callbackName);
+            if (scriptTag) scriptTag.remove();
+        };
+    }, []);
 
     return (
         <section id="blog" className={`section-fullscreen ${darkMode ? 'bg-dark text-white' : 'bg-white'}`}>
@@ -414,45 +538,77 @@ const Blog = ({ darkMode }) => {
                     <h2 className="fw-bold display-6">Latest Blog Posts</h2>
                     <p className="text-muted">Thoughts and insights on technology</p>
                 </div>
-                <div className="row g-4">
-                    {loading ? (
-                        // Loading Animation (Skeleton Loader) - පෙන්වීමට කාඩ්පත් 3ක්
-                        [1, 2, 3].map((n) => (
-                            <div key={n} className="col-md-4">
-                                <div className={`card h-100 border-0 shadow-sm overflow-hidden ${darkMode ? 'bg-secondary bg-opacity-10' : ''}`}>
-                                    <div className="skeleton skeleton-img"></div>
-                                    <div className="card-body p-4">
-                                        <div className="skeleton skeleton-text w-25"></div>
-                                        <div className="skeleton skeleton-title"></div>
-                                        <div className="skeleton skeleton-text"></div>
-                                        <div className="skeleton skeleton-text"></div>
-                                        <div className="skeleton skeleton-text w-50"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        // දත්ත ලැබුණු පසු Posts පෙන්වීම
-                        allPosts.slice(0, visibleCount).map((post, index) => (
-                            <div key={index} className="col-md-4" data-aos="fade-up">
-                                <div className={`card h-100 border-0 shadow-sm overflow-hidden blog-card ${darkMode ? 'bg-secondary bg-opacity-10 text-white' : ''}`}>
-                                    <img src={post.img} className="card-img-top" alt={post.title} />
-                                    <div className="card-body p-4">
-                                        <small className="text-primary fw-bold">{post.date}</small>
-                                        <h5 className="card-title fw-bold mt-2">{post.title}</h5>
-                                        <p className="card-text small opacity-75">{post.excerpt}</p>
-                                        <a href={post.link} target="_blank" rel="noopener noreferrer" className="text-primary text-decoration-none fw-bold">Read More <i className="bi bi-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
+                
+                <div className="position-relative px-lg-5">
+                    {/* Navigation Buttons (පෝස්ට් ගණන වැඩි නම් පමණක් පෙන්වයි) */}
+                    {!loading && allPosts.length > itemsPerPage && (
+                        <>
+                            {currentIndex > 0 && (
+                                <button 
+                                    onClick={prevSlide} 
+                                    className={`btn btn-primary rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 shadow ${darkMode ? 'border-light' : ''}`}
+                                    style={{width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(37, 99, 235, 0.75)', backdropFilter: 'blur(4px)'}}
+                                >
+                                    <i className="bi bi-chevron-left fs-5"></i>
+                                </button>
+                            )}
+                            {currentIndex < allPosts.length - itemsPerPage && (
+                                <button 
+                                    onClick={nextSlide} 
+                                    className={`btn btn-primary rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 shadow ${darkMode ? 'border-light' : ''}`}
+                                    style={{width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(37, 99, 235, 0.75)', backdropFilter: 'blur(4px)'}}
+                                >
+                                    <i className="bi bi-chevron-right fs-5"></i>
+                                </button>
+                            )}
+                        </>
                     )}
+
+                    <div className="overflow-hidden py-3">
+                        <div 
+                            className="d-flex" 
+                            style={{ 
+                                transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                                transition: isFading ? 'opacity 0.5s ease' : 'transform 0.5s ease-in-out, opacity 0.5s ease',
+                                opacity: isFading ? 0 : 1
+                            }}
+                        >
+                            {loading ? (
+                                // Loading Animation (Skeleton Loader)
+                                [...Array(itemsPerPage)].map((_, n) => (
+                                    <div key={n} className="flex-shrink-0 px-3" style={{ width: `${100 / itemsPerPage}%` }}>
+                                        <div className={`card h-100 border-0 shadow-sm overflow-hidden ${darkMode ? 'bg-secondary bg-opacity-10' : ''}`}>
+                                            <div className="skeleton skeleton-img"></div>
+                                            <div className="card-body p-4">
+                                                <div className="skeleton skeleton-text w-25"></div>
+                                                <div className="skeleton skeleton-title"></div>
+                                                <div className="skeleton skeleton-text"></div>
+                                                <div className="skeleton skeleton-text"></div>
+                                                <div className="skeleton skeleton-text w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                // දත්ත ලැබුණු පසු Posts පෙන්වීම
+                                allPosts.map((post, index) => (
+                                    <div key={index} className="flex-shrink-0 px-3" style={{ width: `${100 / itemsPerPage}%` }}>
+                                        <div className={`card h-100 border-0 shadow-sm overflow-hidden blog-card ${darkMode ? 'bg-secondary bg-opacity-10 text-white' : ''}`}>
+                                            <img src={post.img} className="card-img-top" alt={post.title} />
+                                            <div className="card-body p-4">
+                                                <small className="text-primary fw-bold">{post.date}</small>
+                                                <h5 className="card-title fw-bold mt-2">{post.title}</h5>
+                                                <p className="card-text small opacity-75">{post.excerpt}</p>
+                                                <a href={post.link} target="_blank" rel="noopener noreferrer" className="text-primary text-decoration-none fw-bold">Read More <i className="bi bi-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
                 </div>
-                <div className="text-center mt-5">
-                    {/* තවත් Posts තිබේ නම් පමණක් Load More බොත්තම පෙන්වීම */}
-                    {!loading && visibleCount < allPosts.length && (
-                        <button onClick={handleLoadMore} className="btn btn-primary rounded-pill px-4 me-2">Load More</button>
-                    )}
+                <div className="text-center mt-4">
                     <a href="https://blackwebproject.blogspot.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary rounded-pill px-4">Visit Blog</a>
                 </div>
             </div>

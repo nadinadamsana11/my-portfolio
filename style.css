@@ -153,6 +153,11 @@ ul {
   color: var(--secondary-color);
 }
 
+/* Dark mode fix for Hero H1 */
+[data-bs-theme="dark"] .hero h1 {
+  color: #ffffff;
+}
+
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
@@ -407,6 +412,12 @@ ul {
 
 .blog-card:hover {
   transform: translateY(-5px);
+}
+
+/* Blog Image Styles for High Quality & Consistent Layout */
+.blog-card .card-img-top {
+  height: 250px;
+  object-fit: cover;
 }
 
 /* =========================================
@@ -819,6 +830,15 @@ body {
   cursor: text; /* Type කිරීමට පහසු I-beam cursor එක */
 }
 
+/* Skills Section - Show normal cursor alongside custom cursor */
+#skills {
+  cursor: default !important;
+}
+
+#skills .skill-hex {
+  cursor: pointer !important;
+}
+
 /* =========================================
    13. Contact Form Success Popup
    ========================================= */
@@ -872,3 +892,189 @@ body {
 .skeleton-img { width: 100%; height: 200px; }
 .skeleton-text { height: 1rem; margin-bottom: 0.5rem; border-radius: 2px; }
 .skeleton-title { height: 1.5rem; margin-bottom: 1rem; width: 80%; border-radius: 2px; }
+
+/* =========================================
+   15. Mobile Menu Animation
+   ========================================= */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    display: block !important; /* Bootstrap default එක override කිරීම */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  }
+
+  .navbar-collapse.show {
+    max-height: 500px; /* මෙනුවේ අන්තර්ගතයට සරිලන උසක් */
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   16. Glassmorphism Navbar (Backdrop Blur)
+   ========================================= */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.85) !important; /* අර්ධ-පාරදෘශ්‍ය පසුබිම */
+  backdrop-filter: blur(12px); /* Blur Effect එක */
+  -webkit-backdrop-filter: blur(12px); /* Safari Browser එක සඳහා */
+}
+
+[data-bs-theme="dark"] .navbar {
+  background-color: rgba(33, 37, 41, 0.85) !important;
+}
+
+/* =========================================
+   17. 3D Hexa-Sphere Skills Section
+   ========================================= */
+.skills-scene {
+  width: 100%;
+  height: 600px;
+  perspective: 1000px; /* 3D ගැඹුර */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none; /* Mobile scroll වැළැක්වීමට */
+}
+
+.skills-scene:active {
+  cursor: grabbing;
+}
+
+.skills-sphere {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  /* Rotation JS මගින් පාලනය වේ */
+}
+
+.skill-hex-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+}
+
+.skill-hex {
+  position: relative;
+  width: 100px;
+  height: 110px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy Flip Effect */
+  cursor: pointer;
+  /* Floating Animation (JS මගින් delay එකතු කරයි) */
+  animation: float-hex 3s ease-in-out infinite;
+}
+
+@keyframes float-hex {
+  0%, 100% { transform: translateZ(0); }
+  50% { transform: translateZ(15px); } /* හුස්ම ගන්නා ආකාරයේ චලනය */
+}
+
+.skill-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Hexagon Shape Clip Path */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(30, 41, 59, 0.9);
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  color: white;
+  padding: 10px;
+}
+
+.skill-face.front:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .skills-scene {
+    height: 450px;
+  }
+  .skill-hex {
+    width: 80px;
+    height: 88px;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================================
+   18. Skill Detail Popup
+   ========================================= */
+.skill-detail-popup {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 25px;
+  color: white;
+  z-index: 100;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-close-popup {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-close-popup:hover {
+  background: #ef4444;
+  transform: rotate(90deg);
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translate(50px, -50%); }
+  to { opacity: 1; transform: translate(0, -50%); }
+}
+
+@media (max-width: 768px) {
+  .skill-detail-popup {
+    right: 50%;
+    transform: translate(50%, -50%); /* Center on mobile */
+    width: 90%;
+  }
+  
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translate(50%, -40%); }
+    to { opacity: 1; transform: translate(50%, -50%); }
+  }
+}
