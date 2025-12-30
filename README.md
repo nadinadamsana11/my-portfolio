@@ -28,8 +28,7 @@ I'm **Nadina Damsana**, a passionate Freelance Web Developer. I specialize in bu
 
 ### 📫 Let's Connect
 I am open to collaborations and freelance opportunities. Feel free to reach out!
-* **LinkedIn:** [Your LinkedIn Profile Link]
-* **Email:** [Your Email Address]
+* **LinkedIn:** https://www.linkedin.com/in/nadinadamsana
 * **GitHub:** [@nadinadamsana11](https://github.com/nadinadamsana11)
 
 ---
