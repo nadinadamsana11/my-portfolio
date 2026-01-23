@@ -36,7 +36,7 @@ The following technologies and libraries were used to develop this web applicati
 
 * **GitHub**: [nadinadamsana11](https://github.com/nadinadamsana11)
 * **LinkedIn**: [nadinadamsana](https://linkedin.com/in/nadinadamsana)
-* **Email**: [nadinadamsana11@gmail.com](mailto:nadinadamsana11@gmail.com)
+* **Email**: [nadinadamsana78@gmail.com](mailto:nadinadamsana78@gmail.com)
 
 ---
 © 2026 Nadina Damsana. DESIGNED FOR HIGH PERFORMANCE.
