@@ -4,7 +4,7 @@ Welcome to my professional portfolio repository! This project showcases my skill
 
 ### 🌐 Live Preview
 You can view the live website here: 
-👉 **[https://nadinadamsana11.github.io/my-portfolio/](https://nadinadamsana11.github.io/my-portfolio/)**
+👉 **[https://nadinadamsana.com.lk](https://nadinadamsana.com.lk)**
 
 ---
 
