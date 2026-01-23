@@ -1,35 +1,42 @@
-# 🚀 Freelance Web Developer Portfolio
+# 🚀 Nadina Damsana | Portfolio
 
-Welcome to my professional portfolio repository! This project showcases my skills, featured works, and my journey as a web developer.
+This is the official portfolio website for Nadina Damsana, a Freelance Web Developer dedicated to building modern, responsive, and user-centric web experiences. The project focuses on high performance, clean design, and turning complex problems into intuitive solutions.
 
-### 🌐 Live Preview
-You can view the live website here: 
-👉 **[https://nadinadamsana.com.lk](https://nadinadamsana.com.lk)**
+**Live Demo:** [https://nadinadamsana.com.lk/](https://nadinadamsana.com.lk/)
+
+## ✨ Key Features
+
+* **Modern UI/UX**: Built with a "True Black" theme and high-performance design principles.
+* **Fully Responsive**: Designed to provide a seamless experience across all device sizes.
+* **Interactive Components**: Includes custom IQ gauges and hover-responsive project cards.
+* **Automation Focus**: Highlights expertise in system design and automation.
+
+## 🛠️ Built With (Tech Stack)
+
+The following technologies and libraries were used to develop this web application:
+
+* **Frontend**: 
+    * **HTML5**: For the core structure of the web pages.
+    * **Tailwind CSS**: Used for performance-focused, utility-first styling.
+    * **JavaScript (ES6+)**: Powers the site's logic and dynamic interactions.
+* **Design & Assets**:
+    * **Lucide Icons**: For clean, scalable vector icons.
+    * **Google Fonts**: Utilizing the 'Plus Jakarta Sans' typeface.
+* **Development Tools**:
+    * **Git**: For version control.
+    * **VS Code**: As the primary code editor.
+
+## 📊 Core Expertise Displayed
+
+* **JavaScript Development**: The primary language for building interactive elements.
+* **System Architecture**: Demonstrating skills in designing resilient backend and frontend systems.
+* **Modern Web Standards**: Utilizing ES6+ and responsive grid layouts.
+
+## 🌐 Connect with Me
+
+* **GitHub**: [nadinadamsana11](https://github.com/nadinadamsana11)
+* **LinkedIn**: [nadinadamsana](https://linkedin.com/in/nadinadamsana)
+* **Email**: [nadinadamsana11@gmail.com](mailto:nadinadamsana11@gmail.com)
 
 ---
-
-### 🛠️ Tech Stack
-This portfolio was built using modern web technologies:
-* **HTML5** - For semantic structural markup.
-* **CSS3** - For custom styling, layout (Flexbox/Grid), and animations.
-* **JavaScript** - For interactive elements and dynamic functionality.
-* **FontAwesome** - For professional scalable vector icons.
-
-### ✨ Key Features
-* **Fully Responsive:** Optimized for all screen sizes from mobile devices to large desktops.
-* **Interactive UI:** Includes smooth scrolling, hover effects, and a dynamic skill orbit.
-* **Project Showcase:** A dedicated section displaying my latest web development work.
-* **Modern Design:** Clean, minimal, and professional aesthetic focusing on user experience.
-
----
-
-### 👨‍💻 About Me
-I'm **Nadina Damsana**, a passionate Freelance Web Developer. I specialize in building high-quality, user-friendly websites and applications. I am constantly learning new technologies to deliver the best digital solutions for my clients.
-
-### 📫 Let's Connect
-I am open to collaborations and freelance opportunities. Feel free to reach out!
-* **LinkedIn:** https://www.linkedin.com/in/nadinadamsana
-* **GitHub:** [@nadinadamsana11](https://github.com/nadinadamsana11)
-
----
-⭐️ If you like this project, please feel free to give it a star!
+© 2026 Nadina Damsana. DESIGNED FOR HIGH PERFORMANCE.
