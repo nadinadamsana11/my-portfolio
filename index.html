@@ -1,90 +1,384 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nadina Damsana - Portfolio</title>
-
-    <!-- 1. React and ReactDOM CDN Links -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    
-    <!-- 2. Babel CDN (Required to convert JSX to JavaScript in the browser) -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- 3. Framework CDNs (Tailwind, Bootstrap CSS, Bootstrap Icons) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- style.css යනු ඔබේ CSS ගොනුවේ නමයි -->
-    <link rel="stylesheet" href="style.css">
+    <title>Nadina Damsana | Portfolio</title>
+    <!-- Tailwind CSS - Performance Focused -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* 4. පසුබිමට තරු රටාවක් (Starry Background) */
-        .skills-bg-animated {
-            background-color: transparent;
-            /* තරු රටාව (Star Pattern) */
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: bgMove 100s linear infinite;
-        }
-        @keyframes bgMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #050505; /* True Black */
         }
 
-        /* 5. අකුරු තෝරාගැනීම වැළැක්වීම (Disable Text Selection) */
-        .no-select {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE/Edge */
-            user-select: none; /* Standard */
+        /* Subtle Dark Grid */
+        .bg-grid-pattern {
+            background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
-        /* 3. Popup එක ඇති විට කැරකෙන එක නැවැත්වීම (Pause Animation) */
-        .animation-paused {
-            animation-play-state: paused !important;
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1a1a1a;
         }
+
+        .hero-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1), transparent 70%);
+        }
+
+        .card-dark {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-dark:hover {
+            border-color: #3b82f6;
+            background: #111111;
+            transform: translateY(-5px);
+        }
+
+        /* IQ Gauge Style - Updated for 112 IQ (approx 74.6% based on a max scale context) */
+        .iq-gauge {
+            background: conic-gradient(#2563eb 0% 74.6%, #1a1a1a 74.6% 100%);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="text-slate-400 bg-grid-pattern">
 
-    <div id="root"></div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white tracking-tighter">NADIN<span class="text-blue-600">.</span></a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-widest">
+                <a href="#about" class="hover:text-blue-500 transition">About</a>
+                <a href="#skills" class="hover:text-blue-500 transition">Stack</a>
+                <a href="#projects" class="hover:text-blue-500 transition">Work</a>
+                <a href="https://github.com/nadinadamsana11" target="_blank" class="text-white border border-white/10 hover:bg-white/5 px-5 py-2 rounded-full transition flex items-center gap-2">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                </a>
+            </div>
+            
+            <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
+        </div>
+    </nav>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 hero-glow">
+        <div class="container mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/5 border border-blue-500/10 text-blue-500 text-xs font-bold mb-8">
+                <i data-lucide="zap" class="w-3 h-3"></i> ACTIVE DEVELOPER
+            </div>
+            <h1 class="text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight">
+                Nadina <span class="text-blue-600">Damsana</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+		I am a passionate Freelance Web Developer dedicated to building modern, responsive, and user-centric web experiences. I love turning complex problems into simple, beautiful, and intuitive designs.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#projects" class="px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all shadow-lg shadow-blue-900/20">Explore Projects</a>
+                
+                <!-- Buy Me A Coffee Button -->
+                <a href="https://www.buymeacoffee.com/nadinadamsana" target="_blank" class="px-10 py-4 bg-yellow-500 text-black font-bold rounded-full hover:bg-yellow-600 transition-all flex items-center gap-2">
+                    <i data-lucide="coffee" class="w-5 h-5"></i> Buy me a coffee
+                </a>
 
-    <!-- AOS Animation JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/nadinadamsana11" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 hover:border-blue-600 transition group" title="GitHub">
+                        <i data-lucide="github" class="w-5 h-5 group-hover:text-blue-600"></i>
+                    </a>
+                    <a href="mailto:nadinadamsana11@gmail.com" class="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 hover:border-blue-600 transition group" title="Email">
+                        <i data-lucide="mail" class="w-5 h-5 group-hover:text-blue-600"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 4. React Code (type="text/babel" is important) -->
-    <script type="text/babel" src="script.js"></script>
+    <!-- IQ Display & GitHub Metrics -->
+    <div class="border-y border-[#1a1a1a] bg-[#080808] py-16">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+            <!-- IQ Meter Section (Updated to 112) -->
+            <div class="md:col-span-1 flex flex-col items-center border-r border-white/5 md:pr-8">
+                <div class="w-24 h-24 iq-gauge flex items-center justify-center">
+                    <div class="w-20 h-20 bg-[#080808] rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">112</span>
+                    </div>
+                </div>
+                <div class="text-xs text-blue-500 uppercase tracking-widest mt-4 font-bold">Cognitive IQ</div>
+            </div>
 
-    <!-- Terminal Window -->
-    <div id="terminal-icon">
-        <i class="bi bi-terminal"></i>
+            <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white">10+</div>
+                    <div class="text-xs text-slate-600 uppercase tracking-widest mt-2">Repositories</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white">JavaScript</div>
+                    <div class="text-xs text-slate-600 uppercase tracking-widest mt-2">Core Language</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white">API</div>
+                    <div class="text-xs text-slate-600 uppercase tracking-widest mt-2">Integrations</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white">24/7</div>
+                    <div class="text-xs text-slate-600 uppercase tracking-widest mt-2">Server Uptime</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="terminal-window">
-        <div id="terminal-resizer"></div>
-        <div id="terminal-header">
-            <span class="terminal-title">Terminal</span>
-            <span id="close-terminal">×</span>
+    <!-- About Section -->
+    <section id="about" class="py-32">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-20 items-center">
+                <div class="w-full md:w-2/5">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-blue-600/10 rounded-3xl blur-2xl"></div>
+                        <img src="https://github.com/nadinadamsana11.png" alt="Nadin Profile" class="relative rounded-3xl w-full border border-white/10 grayscale hover:grayscale-0 transition duration-700">
+                    </div>
+                </div>
+                <div class="w-full md:w-3/5">
+                    <h2 class="text-4xl font-bold text-white mb-8 tracking-tight">Full Stack Developer & <br><span class="text-blue-600">Automation Specialist</span></h2>
+                    <p class="text-lg text-slate-500 leading-relaxed mb-8">
+                        I am a passionate Freelance Web Developer dedicated to building modern, responsive, and user-centric web experiences. I love turning complex problems into simple, beautiful, and intuitive designs.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-6 card-dark rounded-2xl">
+                            <i data-lucide="layers" class="text-blue-500 mb-4 w-6 h-6"></i>
+                            <h4 class="text-white font-bold mb-2">System Design</h4>
+                            <p class="text-sm">Architecting resilient backend systems and database structures.</p>
+                        </div>
+                        <div class="p-6 card-dark rounded-2xl">
+                            <i data-lucide="code" class="text-blue-500 mb-4 w-6 h-6"></i>
+                            <h4 class="text-white font-bold mb-2">Modern Code</h4>
+                            <p class="text-sm">Utilizing the latest ES6+ and Python 3.10+ standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="terminal-body">
-            <div id="terminal-output"></div>
-            <input type="text" id="terminal-input" placeholder="Enter command" />
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="skills" class="py-32 bg-[#080808]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-center text-3xl font-bold text-white mb-20 tracking-tighter">Technology Stack</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <!-- JS -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-600 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-10 h-10" alt="JS">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">JavaScript</span>
+                </div>
+                <!-- Firebase -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-yellow-500 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg" class="w-10 h-10" alt="Firebase">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">Firebase</span>
+                </div>
+                <!-- React -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-600 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="w-10 h-10" alt="React">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">React</span>
+                </div>
+                <!-- Python -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-600 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-10 h-10" alt="Python">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">Python</span>
+                </div>
+                <!-- Node -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-green-600 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="w-10 h-10" alt="Node">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">Node.js</span>
+                </div>
+                <!-- MongoDB -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-green-500 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="w-10 h-10" alt="MongoDB">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">MongoDB</span>
+                </div>
+                <!-- MySQL -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-500 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-10 h-10" alt="MySQL">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">MySQL</span>
+                </div>
+                <!-- Git -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-orange-600 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-10 h-10" alt="Git">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">Git</span>
+                </div>
+                 <!-- CSS3 -->
+                 <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-400 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-10 h-10" alt="CSS3">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">CSS3</span>
+                </div>
+                <!-- HTML5 -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-orange-500 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-10 h-10" alt="HTML5">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">HTML5</span>
+                </div>
+                <!-- VSCode -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-blue-500 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="w-10 h-10" alt="VSCode">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">VS Code</span>
+                </div>
+                <!-- Tailwind -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-20 h-20 rounded-2xl card-dark flex items-center justify-center group-hover:border-cyan-400 transition-colors">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" class="w-10 h-10" alt="Tailwind">
+                    </div>
+                    <span class="text-sm font-bold uppercase tracking-widest text-slate-600 group-hover:text-white transition">Tailwind</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-<!-- Custom Terminal Element -->
-<div class="cursor-dot"></div>
+    <!-- Best Repositories Section -->
+    <section id="projects" class="py-32">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <h2 class="text-4xl font-bold text-white mb-4">Best Repositories</h2>
+                    <p class="text-slate-500">Selected work from my GitHub ecosystem</p>
+                </div>
+                <a href="https://github.com/nadinadamsana11?tab=repositories" target="_blank" class="text-sm font-bold text-blue-500 hover:text-blue-400 transition flex items-center gap-2">
+                    BROWSE ALL <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card -->
+                <div class="card-dark rounded-3xl p-8 flex flex-col group">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            <i data-lucide="cpu"></i>
+                        </div>
+                        <a href="https://github.com/nadinadamsana11" target="_blank" class="text-slate-600 hover:text-white transition"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-blue-500 transition">Portfolio</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                        Powerful automation systems built for scalability and performance across different platforms.
+                    </p>
+                    <div class="flex items-center gap-4 text-[10px] font-bold text-slate-600 uppercase tracking-widest">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> JS</span>
+                        <span>v1.0.0</span>
+                    </div>
+                </div>
 
+                <!-- Project Card -->
+                <div class="card-dark rounded-3xl p-8 flex flex-col group">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                            <i data-lucide="globe"></i>
+                        </div>
+                        <a href="https://github.com/nadinadamsana11" target="_blank" class="text-slate-600 hover:text-white transition"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-purple-500 transition">API Ecosystem</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                        Robust REST API endpoints designed for high concurrency and secure data transmission.
+                    </p>
+                    <div class="flex items-center gap-4 text-[10px] font-bold text-slate-600 uppercase tracking-widest">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-yellow-500"></span> JavaScript</span>
+                        <span>Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Project Card -->
+                <div class="card-dark rounded-3xl p-8 flex flex-col group">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                            <i data-lucide="terminal"></i>
+                        </div>
+                        <a href="https://github.com/nadinadamsana11" target="_blank" class="text-slate-600 hover:text-white transition"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-emerald-500 transition">CLI Utilities</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                        Powerful command-line interface tools for developers to automate local system tasks.
+                    </p>
+                    <div class="flex items-center gap-4 text-[10px] font-bold text-slate-600 uppercase tracking-widest">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-400"></span> C++</span>
+                        <span>Optimized</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-[#1a1a1a] bg-[#050505]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="text-center md:text-left">
+                    <div class="text-white font-bold text-xl tracking-tighter mb-2">NADIN ADAMSANA</div>
+                    <p class="text-slate-600 text-sm">Building the future of automation.</p>
+                </div>
+                
+                <!-- Social Icons Section (Telegram Removed) -->
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://github.com/nadinadamsana11" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:border-blue-600 hover:text-white transition group" title="GitHub">
+                        <i data-lucide="github" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://facebook.com/nadinadamsana0" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:border-blue-700 hover:text-white transition group" title="Facebook">
+                        <i data-lucide="facebook" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://instagram.com/nadinadamsana0" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:border-pink-600 hover:text-white transition group" title="Instagram">
+                        <i data-lucide="instagram" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/nadinadamsana" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:border-blue-500 hover:text-white transition group" title="LinkedIn">
+                        <i data-lucide="linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://youtube.com/@nadinadamsana" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:border-red-600 hover:text-white transition group" title="YouTube">
+                        <i data-lucide="youtube" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-16 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-slate-800">
+                &copy; 2026 DESIGNED FOR HIGH PERFORMANCE
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Iconsa
+        lucide.createIcons();
+    </script>
 </body>
 </html>
