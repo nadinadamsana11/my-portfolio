@@ -34,18 +34,36 @@
         .card-dark {
             background: #0d0d0d;
             border: 1px solid #1a1a1a;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-dark:hover {
             border-color: #3b82f6;
             background: #111111;
+            transform: translateY(-4px);
         }
 
         .gradient-text {
             background: linear-gradient(to right, #ffffff, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .step-number {
+            -webkit-text-stroke: 1px rgba(59, 130, 246, 0.3);
+            color: transparent;
+        }
+
+        .stack-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.75rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         /* Custom Scrollbar */
@@ -63,8 +81,8 @@
                 NADINA DAMSANA<span class="text-blue-600">.</span>
             </a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="details.html" class="text-xs font-bold uppercase tracking-widest hover:text-white transition">Public Profile</a>
-                <a href="contact.html" class="px-5 py-2 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-700 transition">Get in Touch</a>
+                <a href="details.html" class="text-xs font-bold uppercase tracking-widest hover:text-white transition">SEO Profile</a>
+                <a href="contact.html" class="px-5 py-2 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-700 transition shadow-lg shadow-blue-900/20">Hire Me</a>
             </div>
         </div>
     </nav>
@@ -76,107 +94,202 @@
             <section class="mb-24">
                 <div class="max-w-4xl">
                     <div class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
-                        Professional Story
+                        Architecting Excellence
                     </div>
-                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight leading-none">
-                        Crafting digital <br>
-                        <span class="gradient-text">masterpieces with code.</span>
+                    <h1 class="text-5xl md:text-8xl font-bold text-white mb-8 tracking-tight leading-[0.9]">
+                        I build products <br>
+                        <span class="gradient-text">that drive growth.</span>
                     </h1>
                     <p class="text-xl text-slate-500 leading-relaxed max-w-2xl">
-                        I am a Full Stack Developer based in Sri Lanka, specializing in building high-performance web applications that merge technical precision with intuitive user experiences.
+                        A Senior Full Stack Developer specializing in the modern web stack to create high-conversion digital experiences through scalable code.
                     </p>
                 </div>
             </section>
 
-            <div class="grid lg:grid-cols-12 gap-12">
-                <!-- Profile Image & Quick Facts -->
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="card-dark rounded-3xl p-4">
-                        <img src="https://github.com/nadinadamsana11.png" alt="Nadina Damsana" class="w-full rounded-2xl grayscale hover:grayscale-0 transition-all duration-500">
+            <!-- Strategic Service Suite -->
+            <section class="mb-32">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <h2 class="text-white font-bold text-3xl mb-2">Service Suite</h2>
+                        <p class="text-slate-500">How I can add value to your business.</p>
+                    </div>
+                    <div class="h-px flex-grow bg-white/5 mx-8 hidden md:block"></div>
+                    <div class="text-blue-500 font-mono text-sm">/01</div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card-dark p-8 rounded-3xl">
+                        <div class="w-12 h-12 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="layers" class="text-blue-500"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-4">Web Applications</h3>
+                        <p class="text-sm leading-relaxed text-slate-500">Crafting lightning-fast, responsive web apps using modern JavaScript frameworks and semantic HTML5/CSS3 structures.</p>
+                    </div>
+                    <div class="card-dark p-8 rounded-3xl">
+                        <div class="w-12 h-12 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="database" class="text-blue-500"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-4">Real-time Backends</h3>
+                        <p class="text-sm leading-relaxed text-slate-500">Leveraging Firebase for instant data synchronization, secure authentication, and serverless cloud functions.</p>
+                    </div>
+                    <div class="card-dark p-8 rounded-3xl">
+                        <div class="w-12 h-12 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="layout" class="text-blue-500"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-4">UX Optimization</h3>
+                        <p class="text-sm leading-relaxed text-slate-500">Designing interfaces that aren't just pretty, but are engineered to convert visitors into loyal customers through better UX.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid lg:grid-cols-12 gap-16 items-start mb-32">
+                <!-- Profile Image & Technical Depth -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="card-dark rounded-[2.5rem] p-4">
+                        <img src="https://github.com/nadinadamsana11.png" alt="Nadina Damsana" class="w-full rounded-[2rem] border border-white/5 grayscale hover:grayscale-0 transition-all duration-700">
                     </div>
                     
-                    <div class="card-dark rounded-3xl p-8 space-y-6">
-                        <h3 class="text-white font-bold uppercase tracking-widest text-xs">Primary Expertise</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-white/5 rounded-md text-xs border border-white/10 text-white">Full Stack Dev</span>
-                            <span class="px-3 py-1 bg-white/5 rounded-md text-xs border border-white/10 text-white">UI/UX Design</span>
-                            <span class="px-3 py-1 bg-white/5 rounded-md text-xs border border-white/10 text-white">System Architecture</span>
-                            <span class="px-3 py-1 bg-white/5 rounded-md text-xs border border-white/10 text-white">Cloud Computing</span>
+                    <div class="card-dark rounded-3xl p-8">
+                        <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-3">
+                            <i data-lucide="terminal" class="w-5 h-5 text-blue-500"></i>
+                            The Modern Stack
+                        </h3>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <div class="stack-badge"><i data-lucide="code-2" class="w-4 h-4 text-orange-500"></i> HTML5</div>
+                            <div class="stack-badge"><i data-lucide="palette" class="w-4 h-4 text-blue-400"></i> CSS3 / Tailwind</div>
+                            <div class="stack-badge"><i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i> JavaScript ES6+</div>
+                            <div class="stack-badge"><i data-lucide="flame" class="w-4 h-4 text-orange-600"></i> Firebase</div>
+                        </div>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">
+                                    <span>Frontend Logic</span>
+                                    <span class="text-blue-500">98%</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-600 w-[98%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">
+                                    <span>Serverless Systems</span>
+                                    <span class="text-blue-500">92%</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-600 w-[92%]"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Biography & Philosophy -->
-                <div class="lg:col-span-8 space-y-16">
+                <!-- Deep Bio & Process -->
+                <div class="lg:col-span-7 space-y-16">
                     <section>
-                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-4">
-                            <span class="w-12 h-px bg-blue-600"></span>
-                            The Journey
-                        </h2>
-                        <div class="text-lg leading-relaxed space-y-6">
+                        <h2 class="text-3xl font-bold text-white mb-8 tracking-tight">Technical Capability</h2>
+                        <div class="text-lg leading-relaxed space-y-6 text-slate-400">
                             <p>
-                                My fascination with technology began at the intersection of logic and creativity. Starting as a self-taught enthusiast, I've evolved into a professional developer focused on the <strong class="text-white">MERN stack</strong> and modern software architectural patterns.
+                                I build with the most reliable technologies of the modern era. My core development workflow is built on <strong class="text-white">Vanilla JavaScript, HTML5, and CSS3</strong>, ensuring that your website has the smallest footprint and fastest load times possible.
                             </p>
                             <p>
-                                With a background deeply rooted in problem-solving, I approach every project not just as a set of features, but as a solution to a real-world business challenge. My experience spans across developing scalable SaaS platforms, automated internal tools, and engaging consumer-facing websites.
+                                For the backend, I utilize <span class="text-blue-500 underline decoration-blue-500/30 underline-offset-4">Firebase</span>. This allows me to provide you with enterprise-level security, real-time database updates, and cloud-scale hosting without the overhead of traditional server management.
+                            </p>
+                            <p>
+                                By mastering these core technologies, I ensure your product is future-proof, easily maintainable, and performs exceptionally on every device.
                             </p>
                         </div>
                     </section>
 
-                    <!-- Professional Experience (from LinkedIn data) -->
+                    <!-- The Process -->
                     <section>
-                        <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-4">
+                        <h2 class="text-2xl font-bold text-white mb-12 flex items-center gap-4">
                             <span class="w-12 h-px bg-blue-600"></span>
-                            Experience
+                            How I Work
                         </h2>
-                        <div class="space-y-8">
-                            <!-- Job 1 -->
-                            <div class="relative pl-8 border-l border-white/10">
-                                <div class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-blue-600"></div>
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h4 class="text-white font-bold text-lg">Lead Software Engineer</h4>
-                                    <span class="text-blue-500 text-xs font-bold uppercase tracking-widest">2023 — Present</span>
+                        <div class="space-y-12">
+                            <div class="flex gap-8 group">
+                                <span class="text-5xl font-bold step-number group-hover:text-blue-600 transition-colors duration-500">01</span>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg mb-2 uppercase tracking-wide">Clean Architecture</h4>
+                                    <p class="text-sm text-slate-500 leading-relaxed">I write modular JavaScript and semantic HTML. This results in code that is easy for other developers to read and search engines to index.</p>
                                 </div>
-                                <p class="text-slate-500 text-sm mb-4 italic">Nadina Damsana Digital Solutions</p>
-                                <p class="text-sm leading-relaxed">Overseeing the development of enterprise-grade web applications, focusing on React-based frontends and Node.js microservices.</p>
                             </div>
-
-                            <!-- Job 2 -->
-                            <div class="relative pl-8 border-l border-white/10">
-                                <div class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-slate-700"></div>
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h4 class="text-white font-bold text-lg">Full Stack Developer</h4>
-                                    <span class="text-slate-600 text-xs font-bold uppercase tracking-widest">2021 — 2023</span>
+                            <div class="flex gap-8 group">
+                                <span class="text-5xl font-bold step-number group-hover:text-blue-600 transition-colors duration-500">02</span>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg mb-2 uppercase tracking-wide">Firebase Integration</h4>
+                                    <p class="text-sm text-slate-500 leading-relaxed">I set up Firestore and Firebase Auth to give your users a seamless, secure experience with data that updates in milliseconds.</p>
                                 </div>
-                                <p class="text-slate-500 text-sm mb-4 italic">Freelance & Open Source</p>
-                                <p class="text-sm leading-relaxed">Contributed to various open-source projects and delivered high-quality web solutions for international clients using Python and JavaScript.</p>
+                            </div>
+                            <div class="flex gap-8 group">
+                                <span class="text-5xl font-bold step-number group-hover:text-blue-600 transition-colors duration-500">03</span>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg mb-2 uppercase tracking-wide">Performance Audit</h4>
+                                    <p class="text-sm text-slate-500 leading-relaxed">Before launch, I optimize every line of CSS and JS to ensure a perfect 100/100 score on Google Lighthouse.</p>
+                                </div>
                             </div>
                         </div>
-                    </section>
-
-                    <!-- Core Philosophy -->
-                    <section class="p-8 bg-blue-600/5 border border-blue-600/10 rounded-3xl">
-                        <h3 class="text-xl font-bold text-white mb-4">Development Philosophy</h3>
-                        <p class="text-slate-400 italic">
-                            "I believe that great software is invisible. It should empower the user without getting in their way. My goal is to build tools that feel as natural as thought."
-                        </p>
                     </section>
                 </div>
             </div>
+
+            <!-- Professional Experience -->
+            <section class="mb-32">
+                <div class="flex items-center gap-6 mb-12">
+                    <h2 class="text-white font-bold text-3xl">Career Milestones</h2>
+                    <div class="h-px flex-grow bg-white/5"></div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-dark p-10 rounded-[2.5rem] relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                        <span class="text-blue-500 text-xs font-bold uppercase tracking-widest mb-4 block">2023 — Present</span>
+                        <h4 class="text-white font-bold text-2xl mb-2 tracking-tight">Lead Software Engineer</h4>
+                        <p class="text-slate-500 text-sm mb-6">Nadina Damsana Digital Solutions</p>
+                        <p class="text-sm leading-relaxed text-slate-400">Managing complex web deployments using serverless architectures. Focused on high-availability apps that leverage Firebase's real-time capabilities to serve thousands of concurrent users.</p>
+                    </div>
+
+                    <div class="card-dark p-10 rounded-[2.5rem] relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-600/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                        <span class="text-slate-600 text-xs font-bold uppercase tracking-widest mb-4 block">2021 — 2023</span>
+                        <h4 class="text-white font-bold text-2xl mb-2 tracking-tight">Full Stack Developer</h4>
+                        <p class="text-slate-500 text-sm mb-6">Freelance & Open Source</p>
+                        <p class="text-sm leading-relaxed text-slate-400">Developed a suite of custom automation tools using pure JavaScript. Gained expertise in CSS grid/flexbox layouts and established a strong foundation in modern web standards.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Philosophy Quote -->
+            <section class="mb-32 relative">
+                <div class="absolute -top-12 -left-8 text-9xl font-serif text-blue-600/10 select-none">“</div>
+                <div class="card-dark rounded-[3rem] p-12 md:p-20 text-center">
+                    <h2 class="text-2xl md:text-4xl text-white font-light italic leading-relaxed mb-8">
+                        The best tech stack is the one that solves the user's problem before they even realize it exists. I choose <span class="text-blue-500">HTML, CSS, JS, and Firebase</span> because they provide the perfect balance of speed and power.
+                    </h2>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="w-12 h-1 bg-blue-600"></div>
+                        <span class="text-white font-bold uppercase tracking-widest text-xs">Nadina Damsana</span>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
     <!-- Call to Action -->
-    <section class="py-24 border-t border-white/5">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">Let's build the future together.</h2>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="contact.html" class="px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition">
-                    Start a Conversation
-                </a>
-                <a href="https://linkedin.com/in/nadinadamsana" target="_blank" class="px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-full hover:bg-white/10 transition">
-                    LinkedIn Profile
-                </a>
+    <section class="py-32 border-t border-white/5 bg-[#080808]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="max-w-xl text-center lg:text-left">
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">Ready to build?</h2>
+                    <p class="text-slate-500 text-lg">I am currently accepting new projects for Q1 2026. Let's discuss how we can scale your product together.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="contact.html" class="px-12 py-5 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition text-center shadow-xl shadow-blue-900/20">
+                        Work With Me
+                    </a>
+                    <a href="https://linkedin.com/in/nadinadamsana" target="_blank" class="px-12 py-5 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition text-center">
+                        View LinkedIn
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -186,7 +299,7 @@
             <a href="https://www.google.com/search?q=Nadina+Damsana" target="_blank" class="text-white font-bold text-sm tracking-tighter mb-4 hover:text-blue-500 transition-colors inline-block">
                 NADINA DAMSANA<span class="text-blue-600">.</span>
             </a>
-            <p class="text-[9px] uppercase tracking-[0.3em] text-slate-700">Crafted for Excellence | &copy; 2026</p>
+            <p class="text-[9px] uppercase tracking-[0.3em] text-slate-800">Verified Professional Profile | &copy; 2026</p>
         </div>
     </footer>
 
