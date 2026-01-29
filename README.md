@@ -1,4 +1,4 @@
-# 🚀 Nadina Damsana | Portfolio
+# 🚀 Nadina Damsana | Official Website
 
 This is the official portfolio website for Nadina Damsana, a Freelance Web Developer dedicated to building modern, responsive, and user-centric web experiences. The project focuses on high performance, clean design, and turning complex problems into intuitive solutions.
 
